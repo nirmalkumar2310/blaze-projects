@@ -13,4 +13,6 @@ public interface CartPageElement {
 	String purchase_xpath = "//button[text()='Purchase']";
 	String confirmation_xpath = "//h2[text()='Thank you for your purchase!']";
 	String completed_xpath = "//button[text()='OK']";
+	String logout_id = "logout2";
+	String LogoutValidation_id="login2";
 }

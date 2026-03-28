@@ -3,6 +3,7 @@ package org.pageObjectModel;
 import java.io.IOException;
 
 import org.interfaceElements.CartPageElement;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -44,6 +45,11 @@ public class CartPagePOM extends BaseClass implements CartPageElement{
 	@FindBy(xpath=completed_xpath)
 	private WebElement completed;
 	
+	@FindBy(id=logout_id)
+	private WebElement logout;
+	@FindBy(id=LogoutValidation_id)
+	private WebElement LogoutValidation;
+		
 	public CartPagePOM() {
 		PageFactory.initElements(driver, this);
 	}
@@ -65,5 +71,11 @@ public class CartPagePOM extends BaseClass implements CartPageElement{
 		} catch (IOException e) {
 		}
 		elementClick(completed);
+		staticWait(2000);
+		elementClick(logout);
+		String Actual =LogoutValidation.getText();
+		Assert.assertEquals(Actual,"Log in");
+		System.out.println("logged out successfully");
+		
 	}
 }
