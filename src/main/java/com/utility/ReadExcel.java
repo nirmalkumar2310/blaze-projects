@@ -1,7 +1,9 @@
 package com.utility;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -15,24 +17,26 @@ public class ReadExcel {
 	
 	public static String getExcel(int RowNum , int ColNum) {
 		String data=null;
-		try {
-			File file = new File("C:\\Users\\nirma\\OneDrive\\Desktop\\JAVA.xlsx");
+		
+			try {
+				File file = new File("C:\\Users\\nirma\\OneDrive\\Desktop\\JAVA.xlsx");
+				
+				Workbook book = new XSSFWorkbook(file);
+				
+				Sheet sheet = book.getSheet("Sheet1");
+				
+				Row row = sheet.getRow(RowNum);
+				
+				Cell cell = row.getCell(ColNum);
+				
+				data = cell.getStringCellValue();
+				
+				System.out.println(data);
+			} catch (Exception e) {
+				System.out.println(e);
+			} 
 			
-			Workbook book = new XSSFWorkbook(file);
 			
-			Sheet sheet = book.getSheet("Sheet1");
-			
-		    Row row = sheet.getRow(RowNum);
-		    
-		    Cell cell = row.getCell(ColNum);
-		    
-		    data = cell.getStringCellValue();
-		    
-		    System.out.println(data);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
 		return data;
 	}
 
